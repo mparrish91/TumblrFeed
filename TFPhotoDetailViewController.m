@@ -10,7 +10,8 @@
 
 @interface TFPhotoDetailViewController ()
 
-@property(strong,readwrite,nonatomic) NSArray *posts;
+@property(strong,nonatomic) UIImage *postImage;
+
 
 
 @end
@@ -18,17 +19,24 @@
 @implementation TFPhotoDetailViewController
 
 
-#pragma mark - NSObject
+#pragma mark - Initialize
 
-- (id)initWithMovies:(NSArray *)movieArray
+- (instancetype)init
 {
-    self = [super init];
-    if(self) {
-        _movies = movieArray;
-    }
-    return self;
+    
+    self.postImage = [[UIImage alloc]init];
 }
 
+
+- (instancetype)initWith:(NSString *)url
+{
+    if (!(self = [super init]))
+        return nil;
+    
+    [postImage setImageWithURL:[NSURL URLWithString:@"http://i.imgur.com/r4uwx.jpg"] placeholderImage:[UIImage imageNamed:@"placeholder-avatar"]];
+
+
+}
 
 #pragma mark - UIViewController
 
@@ -53,4 +61,17 @@
 }
 */
 
+#pragma mark - AutoLayout
+
+-(void)setConstraints
+{
+    
+}
+
+
+- (void)loadView
+{
+    [super loadView];
+    
+}
 @end

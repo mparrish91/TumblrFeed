@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4243FAE01DB185C900B39EE9 /* AFNetworking.h in Sources */ = {isa = PBXBuildFile; fileRef = 4243FADF1DB185C200B39EE9 /* AFNetworking.h */; };
 		4249461E1DAFFEF50053EA79 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4249461D1DAFFEF50053EA79 /* main.m */; };
 		424946211DAFFEF50053EA79 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 424946201DAFFEF50053EA79 /* AppDelegate.m */; };
 		424946271DAFFEF50053EA79 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 424946251DAFFEF50053EA79 /* Main.storyboard */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4243FADF1DB185C200B39EE9 /* AFNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
 		424946191DAFFEF50053EA79 /* TumblrFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TumblrFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4249461D1DAFFEF50053EA79 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4249461F1DAFFEF50053EA79 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -57,6 +59,7 @@
 		424946101DAFFEF50053EA79 = {
 			isa = PBXGroup;
 			children = (
+				4243FADF1DB185C200B39EE9 /* AFNetworking.h */,
 				4249461B1DAFFEF50053EA79 /* TumblrFeed */,
 				4249461A1DAFFEF50053EA79 /* Products */,
 				8563EAF22B9BE84BAB74D4FD /* Pods */,
@@ -266,6 +269,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4243FAE01DB185C900B39EE9 /* AFNetworking.h in Sources */,
 				424946211DAFFEF50053EA79 /* AppDelegate.m in Sources */,
 				424946351DAFFF110053EA79 /* TFPhotosViewController.m in Sources */,
 				424946381DAFFF240053EA79 /* TFPhotoDetailViewController.m in Sources */,

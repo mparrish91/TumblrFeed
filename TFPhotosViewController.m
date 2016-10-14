@@ -12,13 +12,19 @@
 
 @interface TFPhotosViewController ()
 
+@property(strong,readwrite,nonatomic) NSArray *posts;
+
+
 @end
 
 @implementation TFPhotosViewController
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self fetchTumblrPosts];
 
 }
 
@@ -33,40 +39,72 @@
                                             completionHandler:^(NSData *data, NSURLResponse *response,
                                                                 NSError *error) {
                                                 if (!error) {
-                                                    //                                                    UIImage *image = [[UIImage alloc] initWithData:data];
-                                                    //                                                    photo.thumbNail = image;
-                                                    //                                                    cell.thumbnailImage.image = photo.thumbNail;
-                                                    
-                                                    //convert to json
-                                                    id JSONObject = nil;
-                                                    if (data.length) {
+                                                        
                                                         NSError *serializationError = nil;
-                                                        JSONObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&serializationError];
-                                                        
-                                                        //iterate through and create
+                                                        id JSONObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&serializationError];
+                                                    
+                                                    if([JSONObject isKindOfClass:[NSDictionary class]])
+                                                    {
+                                                        NSDictionary *results = JSONObject;
                                                         NSMutableArray *objects = nil;
+                                                        NSDictionary *poop = results[@"response"];
+                                                        NSDictionary *poop2 = poop[@"posts"];
+                                                        NSDictionary *poop3 = results[@"response"][@"posts"];
+
+                                                        NSArray *posts = results[@"response"][@"posts"];
+//                                                        NSArray *postsss = results[@"response"][@"posts"][@"trail"][0][@"blog"][@"theme"][@"header_image"];
+
                                                         
-                                                        
-                                                        for (NSDictionary *dict in JSONObject) {
-                                                            TFPost *object = [[TFPost alloc] initWithServerRepresentation:dict];
+                                                        for (NSDictionary *post in posts) {
+                                                            NSArray *trail = post[@"trail"][0];
+                                                            NSArray *trail2 = post[@"trail"];
+                                                            NSArray *trail23 = post[@"trail"][0][@"blog"];
+                                                            NSArray *trail24 = post[@"trail"][@"blog"];
+
+
+//                                                            NSString *name = trail[@"trail"];
+
+                                                            
+
+                                                            NSArray *poop2 = post[@"trail"][0][@"blog"][@"theme"][@"header_image"];
+                                                            
+                                                            TFPost *object = [[TFPost alloc] initWithServerRepresentation:post];
                                                             if (object) [objects addObject:object];
                                                         }
+
+
                                                         
-                                                        
-                                                        if (!JSONObject) {
-                                                            NSLog(@"Error parsing JSON: %@", serializationError);
-                                                        }
-                                                        
-                                                        
-                                                        
-                                                        dispatch_async(dispatch_get_main_queue(), ^{
-                                                            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-                                                        });
-                                                    } else {
-                                                        // HANDLE ERROR //
                                                     }
-                                                }
+                                                    
+//                                              
+//                                                    }
+//                                                    else
+//                                                    {
+//                                                        // there's no guarantee that the outermost object in a JSON
+//                                                        // packet will be a dictionary; if we get here then it wasn't,
+//                                                        // so 'object' shouldn't be treated as an NSDictionary; probably
+//                                                        // you need to report a suitable error condition
+//                                                    }
+//                                                    
+//                                                        //iterate through and create
+//                                                    
+//                                                        
+//                                                    
+//                                                        if (!JSONObject) {
+//                                                            NSLog(@"Error parsing JSON: %@", serializationError);
+//                                                        }
+//                                                        
+//                                                        
+//                                                        
+//                                                        dispatch_async(dispatch_get_main_queue(), ^{
+//                                                            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+//                                                        });
+//                                                    } else {
+//                                                        // HANDLE ERROR //
+//                                                    }
+//                                                     */
                                                 
+                                                }
                                             }];
     
     dispatch_async(dispatch_get_main_queue(), ^{
