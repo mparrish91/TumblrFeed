@@ -21,20 +21,14 @@
 
 #pragma mark - Initialize
 
-- (instancetype)init
-{
-    
-    self.postImage = [[UIImage alloc]init];
-}
-
 
 - (instancetype)initWith:(NSString *)url
 {
     if (!(self = [super init]))
         return nil;
     
-    [postImage setImageWithURL:[NSURL URLWithString:@"http://i.imgur.com/r4uwx.jpg"] placeholderImage:[UIImage imageNamed:@"placeholder-avatar"]];
-
+//    [postImage setImageWithURL:[NSURL URLWithString:@"http://i.imgur.com/r4uwx.jpg"] placeholderImage:[UIImage imageNamed:@"placeholder-avatar"]];
+    return  self;
 
 }
 

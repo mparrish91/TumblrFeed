@@ -18,10 +18,10 @@
     NSMutableDictionary *valuesForKeys = [NSMutableDictionary dictionary];
     id value = nil;
     
-    if ((value = dict[@"header_image"]) && [value isKindOfClass:[NSString class]])
+    if ((value = dict[@"trail"][0][@"blog"][@"theme"][@"header_image"]) && [value isKindOfClass:[NSString class]])
         valuesForKeys[@"imagePath"] = value;
     
-    if ((value = dict[@"blog_name"]) && [value isKindOfClass:[NSString class]])
+    if ((value = dict[@"trail"][0][@"blog"][@"name"]) && [value isKindOfClass:[NSString class]])
         valuesForKeys[@"accountName"] = value;
     
     self.avatarImagePath = @"https://api.tumblr.com/v2/blog/humansofnewyork.tumblr.com/avatar";

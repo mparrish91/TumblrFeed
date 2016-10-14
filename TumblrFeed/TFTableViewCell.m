@@ -58,7 +58,7 @@
     [_accountLabel.heightAnchor constraintEqualToAnchor:margins.centerYAnchor].active = YES;
 
 
-    costIconImageView.image = UIImage(named: "costIcon")
+//    costIconImageView.image = UIImage(named: "costIcon")
 
 }
 
@@ -77,13 +77,13 @@
 
 
 - (void)setAvatarImage:(UIImage*)image {
-    [_avatarImage setImageWithURL:[NSURL URLWithString:@"http://i.imgur.com/r4uwx.jpg"] placeholderImage:[UIImage imageNamed:@"placeholder-avatar"]];
+//    [_avatarImage setImageWithURL:[NSURL URLWithString:@"http://i.imgur.com/r4uwx.jpg"] placeholderImage:[UIImage imageNamed:@"placeholder-avatar"]];
 
     _avatarImage = image;
 }
 
 - (void)setPostImage:(UIImage*)image {
-    [_postImage setImageWithURL:[NSURL URLWithString:@"http://i.imgur.com/r4uwx.jpg"] placeholderImage:[UIImage imageNamed:@"placeholder-avatar"]];
+//    [_postImage setImageWithURL:[NSURL URLWithString:@"http://i.imgur.com/r4uwx.jpg"] placeholderImage:[UIImage imageNamed:@"placeholder-avatar"]];
     
     _avatarImage = image;
 }
