@@ -138,7 +138,17 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 30)];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
+    headerView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.9];
+    
+    UIImageView *profileView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 30, 30)];
+    profileView.clipsToBounds = true;
+    profileView.layer.cornerRadius = 15;
+    profileView.layer.borderColor = [UIColor colorWithWhite:1 alpha:0.9].CGColor;
+    profileView.layer.borderWidth = 1;
+    
+    [profileView setImageWithURL:[NSURL URLWithString:@"https://api.tumblr.com/v2/blog/humansofnewyork.tumblr.com/avatar"] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    [headerView addSubview:profileView];
  
     return headerView;
 }
