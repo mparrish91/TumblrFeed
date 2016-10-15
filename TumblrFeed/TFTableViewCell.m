@@ -52,18 +52,16 @@
     self.avatarImageView.contentMode = UIViewContentModeScaleAspectFit;
 
     
-    
     self.accountLabel.translatesAutoresizingMaskIntoConstraints = false;
-    [self.accountLabel.centerYAnchor constraintEqualToAnchor:margins.centerYAnchor].active = YES;
-    [self.accountLabel.trailingAnchor constraintEqualToAnchor:margins.trailingAnchor].active = YES;
-    [self.accountLabel.widthAnchor constraintEqualToAnchor:margins.widthAnchor].active = YES;
-    [self.accountLabel.heightAnchor constraintEqualToAnchor:margins.heightAnchor].active = YES;
+//    [self.accountLabel.centerYAnchor constraintEqualToAnchor:self.avatarImageView.centerYAnchor].active = YES;
+//    [self.accountLabel.leadingAnchor constraintEqualToAnchor:self.avatarImageView.trailingAnchor constant:1].active = YES;
     
-    self.accountLabel.translatesAutoresizingMaskIntoConstraints = false;
-    [self.accountLabel.centerXAnchor constraintEqualToAnchor:self.accountLabel.centerXAnchor].active = YES;
-    [self.accountLabel.leadingAnchor constraintEqualToAnchor:self.accountLabel.trailingAnchor].active = YES;
- 
-    
+    [self.accountLabel.trailingAnchor constraintEqualToAnchor:margins.leadingAnchor constant:10];
+    [self.accountLabel.topAnchor constraintEqualToAnchor:margins.topAnchor].active = YES;
+
+     self.accountLabel.font = [UIFont fontWithName:@"Avenir-Book" size:9];
+
+//    
     self.postImageView.translatesAutoresizingMaskIntoConstraints = false;
     [self.postImageView.leadingAnchor constraintEqualToAnchor:margins.leadingAnchor].active = YES;
     [self.postImageView.trailingAnchor constraintEqualToAnchor:margins.trailingAnchor].active = YES;
@@ -77,17 +75,17 @@
 
 #pragma mark - Accessing
 
-- (void)setPhotoImageURL:(NSString *)photoImageURL
-{
-    _photoImageURL = photoImageURL;
-    [self.avatarImageView setImageWithURL:[NSURL URLWithString:photoImageURL] placeholderImage:[UIImage imageNamed:@"placeholder"]];
-
-    
-    //FIXME: hack fix
-    NSString* avatarImagePath = @"https://api.tumblr.com/v2/blog/humansofnewyork.tumblr.com/avatar";
-    [self.avatarImageView setImageWithURL:[NSURL URLWithString:avatarImagePath] placeholderImage:[UIImage imageNamed:@"placeholder"]];
-
-}
+//- (void)setPhotoImageURL:(NSString *)photoImageURL
+//{
+//    _photoImageURL = photoImageURL;
+//    [self.avatarImageView setImageWithURL:[NSURL URLWithString:photoImageURL] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+//
+//    
+//    //FIXME: hack fix
+//    NSString* avatarImagePath = @"https://api.tumblr.com/v2/blog/humansofnewyork.tumblr.com/avatar";
+//    [self.avatarImageView setImageWithURL:[NSURL URLWithString:avatarImagePath] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+//
+//}
 
 
 

@@ -10,6 +10,7 @@
 #import "TFPhotoDetailViewController.h"
 #import "TFTableViewCell.h"
 #import "TFPost.h"
+#import "UIImageView+AFNetworking.h"
 
 
 @interface TFPhotosViewController ()
@@ -123,8 +124,9 @@
         cell = [[TFTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     cell.accountLabel.text = [[self.posts objectAtIndex:indexPath.row] accountName];
-    cell.photoImageURL = [[self.posts objectAtIndex:indexPath.row] imagePath];
-    
+    NSString *photoImageURL = [[self.posts objectAtIndex:indexPath.row] imagePath];
+    [cell.postImageView setImageWithURL:[NSURL URLWithString:photoImageURL] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+
     
     return cell;
 }
