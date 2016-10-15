@@ -19,10 +19,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+
+    
     TFPhotosViewController *vc = [[TFPhotosViewController alloc] init];
-    //set window
+    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
+
     self.window=[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    [self.window setRootViewController:vc];
+    [self.window setRootViewController:nav];
     [self.window makeKeyAndVisible];
     
     return YES;

@@ -39,6 +39,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    NSString *cellIdentifier = @"cell";
+    
+    [self.postsTableView registerClass:[TFTableViewCell class] forCellReuseIdentifier:cellIdentifier];
+    
+    self.postsTableView.delegate = self;
+    self.postsTableView.dataSource = self;
+
+    
     [self fetchTumblrPosts];
 
 }
@@ -87,9 +95,8 @@
     return self.posts.count;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 50;
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
+    return 320;
 }
 
 
@@ -125,6 +132,20 @@
     
     [view addSubview:self.postsTableView];
 
+}
+
+
+-(void)setConstraints
+{
+    
+    UILayoutGuide *margins = self.view.layoutMarginsGuide;
+    
+    self.postsTableView.translatesAutoresizingMaskIntoConstraints = false;
+    [self.postsTableView.leadingAnchor constraintEqualToAnchor:margins.leadingAnchor].active = YES;
+    [self.postsTableView.trailingAnchor constraintEqualToAnchor:margins.trailingAnchor].active = YES;
+    [self.postsTableView.topAnchor constraintEqualToAnchor:margins.topAnchor].active = YES;
+    [self.postsTableView.bottomAnchor constraintEqualToAnchor:margins.bottomAnchor].active = YES;
+    
 }
 
 @end
