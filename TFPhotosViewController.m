@@ -17,6 +17,7 @@
 
 @property(strong,readwrite,nonatomic) NSArray *posts;
 @property(nonatomic,strong) UITableView *postsTableView;
+@property(nonatomic,strong) UIRefreshControl *refreshControl;
 
 
 @end
@@ -41,13 +42,15 @@
 
     self.title = @"Tumblr";
 
-    
+    //tableview
     NSString *cellIdentifier = @"cell";
-    
     [self.postsTableView registerClass:[TFTableViewCell class] forCellReuseIdentifier:cellIdentifier];
-    
     self.postsTableView.delegate = self;
     self.postsTableView.dataSource = self;
+    self.refreshControl = [[UIRefreshControl alloc]init];
+    [self.postsTableView addSubview:self.refreshControl];
+    [self.refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
+
 
     [self setConstraints];
     [self fetchTumblrPosts];
@@ -88,6 +91,8 @@
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.postsTableView reloadData];
+            [self.refreshControl endRefreshing];
+
             if ([[NSThread currentThread] isMainThread]){
                 NSLog(@"In main thread--completion handler");
             }
@@ -123,12 +128,16 @@
     {
         cell = [[TFTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    cell.accountLabel.text = [[self.posts objectAtIndex:indexPath.row] accountName];
-    NSString *photoImageURL = [[self.posts objectAtIndex:indexPath.row] imagePath];
-    NSString *avatarImageURL = [[self.posts objectAtIndex:indexPath.row] avatarImagePath];
+    TFPost *post = [self.posts objectAtIndex:indexPath.row];
+    cell.accountLabel.text = [post accountName];
+    cell.timeLabel.text = [self convertStringToDate:post.date];
+    NSString *photoImageURL = [post imagePath];
+    NSString *avatarImageURL = [post avatarImagePath];
 
     [cell.postImageView setImageWithURL:[NSURL URLWithString:photoImageURL] placeholderImage:[UIImage imageNamed:@"placeholder-background"]];
     [cell.avatarImageView setImageWithURL:[NSURL URLWithString:avatarImageURL] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+
+
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
     
@@ -141,6 +150,12 @@
     
     TFPhotoDetailViewController *detailVC = [[TFPhotoDetailViewController alloc]initWithURL:[[self.posts objectAtIndex:indexPath.row] imagePath]];
     [self.navigationController pushViewController:detailVC animated:true];
+}
+
+- (void)refreshTable {
+    //TODO: refresh your data
+    
+    [self fetchTumblrPosts];
 }
 
 
@@ -167,5 +182,16 @@
     [self.postsTableView.bottomAnchor constraintEqualToAnchor:view.bottomAnchor].active = YES;
     
 }
+     
+- (NSString *)convertStringToDate: (NSDate *)date
+{
+         
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"MM.YY"];
+    NSString *dateStr = [dateFormat stringFromDate:date];
+         
+    return dateStr;
+}
+
 
 @end

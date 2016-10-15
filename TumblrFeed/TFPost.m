@@ -25,11 +25,25 @@
     if ((value = dict[@"trail"][0][@"blog"][@"name"]) && [value isKindOfClass:[NSString class]])
         valuesForKeys[@"accountName"] = value;
     
+    if ((value = dict[@"date"]) && [value isKindOfClass:[NSString class]])
+        valuesForKeys[@"date"] = [self convertStringToDate:value];
+
     self.avatarImagePath = @"https://api.tumblr.com/v2/blog/humansofnewyork.tumblr.com/avatar";
     
     [self setValuesForKeysWithDictionary:valuesForKeys];
     
     return self;
+}
+
+
+
+- (NSDate *)convertStringToDate: (NSString *)str
+{
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyyMMdd"];
+    NSDate *date = [dateFormat dateFromString:str];
+
+    return date;
 }
 
 

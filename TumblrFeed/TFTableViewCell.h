@@ -15,5 +15,7 @@
 @property(strong,nonatomic) UIImageView *postImageView;
 
 @property(strong,nonatomic) NSString *photoImageURL;
+@property(strong,nonatomic) UILabel *timeLabel;
+
 
 @end

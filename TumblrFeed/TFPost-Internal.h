@@ -16,6 +16,7 @@
 @property(strong,readwrite,nonatomic) NSString *avatarImagePath;
 
 @property(strong,readwrite,nonatomic) NSString *accountName;
+@property(strong,readwrite,nonatomic) NSDate *date;
 
 
 
