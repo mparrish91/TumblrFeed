@@ -22,8 +22,8 @@
 {
     
     self.accountLabel = [[UILabel alloc]init];
-    self.avatarImage = [[UIImage alloc]init];
-    self.postImage = [[UIImage alloc]init];
+    self.avatarImage = [[UIImageView alloc]init];
+    self.postImage = [[UIImageView alloc]init];
     self.photoImageURL = [[NSString alloc]init];
 
     
@@ -43,27 +43,25 @@
     
     UILayoutGuide *margins = self.contentView.layoutMarginsGuide;
     
-    _accountLabel.translatesAutoresizingMaskIntoConstraints = false;
-    [_accountLabel.centerYAnchor constraintEqualToAnchor:margins.centerYAnchor].active = YES;
-    [_accountLabel.trailingAnchor constraintEqualToAnchor:margins.centerYAnchor].active = YES;
-    [_accountLabel.widthAnchor constraintEqualToAnchor:margins.centerYAnchor].active = YES;
-    [_accountLabel.heightAnchor constraintEqualToAnchor:margins.centerYAnchor].active = YES;
-
-
-//    costIconImageView.image = UIImage(named: "costIcon")
-
+    self.avatarImage.translatesAutoresizingMaskIntoConstraints = false;
+    [self.avatarImage.leadingAnchor constraintEqualToAnchor:margins.leadingAnchor].active = YES;
+    [self.avatarImage.topAnchor constraintEqualToAnchor:margins.topAnchor].active = YES;
+    [self.avatarImage.widthAnchor constraintEqualToAnchor:margins.widthAnchor constant:5].active = YES;
+    [self.avatarImage.heightAnchor constraintEqualToAnchor:margins.heightAnchor constant:5].active = YES;
+    
+    
+    self.accountLabel.translatesAutoresizingMaskIntoConstraints = false;
+    [self.accountLabel.centerYAnchor constraintEqualToAnchor:margins.centerYAnchor].active = YES;
+    [self.accountLabel.trailingAnchor constraintEqualToAnchor:margins.trailingAnchor].active = YES;
+    [self.accountLabel.widthAnchor constraintEqualToAnchor:margins.widthAnchor].active = YES;
+    [self.accountLabel.heightAnchor constraintEqualToAnchor:margins.heightAnchor].active = YES;
+    
+    self.accountLabel.translatesAutoresizingMaskIntoConstraints = false;
+    [self.accountLabel.centerXAnchor constraintEqualToAnchor:self.accountLabel.centerXAnchor].active = YES;
+    [self.accountLabel.leadingAnchor constraintEqualToAnchor:self.accountLabel.trailingAnchor].active = YES;
+ 
 }
 
-//- (void)awakeFromNib {
-//    [super awakeFromNib];
-//    // Initialization code
-//}
-//
-//- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-//    [super setSelected:selected animated:animated];
-//
-//    // Configure the view for the selected state
-//}
 
 #pragma mark - Accessing
 

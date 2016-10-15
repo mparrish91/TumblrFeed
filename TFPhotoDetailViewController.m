@@ -10,7 +10,7 @@
 
 @interface TFPhotoDetailViewController ()
 
-@property(strong,nonatomic) UIImage *postImage;
+@property(strong,nonatomic) UIImageView *postImageView;
 
 
 
@@ -37,28 +37,25 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    [self setConstraints];
+
+
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 #pragma mark - AutoLayout
 
 -(void)setConstraints
 {
+    
+    UIView *view = self.view;
+    
+    self.postImageView.translatesAutoresizingMaskIntoConstraints = false;
+    [self.postImageView.leadingAnchor constraintEqualToAnchor:view.leadingAnchor].active = YES;
+    [self.postImageView.trailingAnchor constraintEqualToAnchor:view.trailingAnchor].active = YES;
+    [self.postImageView.topAnchor constraintEqualToAnchor:view.topAnchor].active = YES;
+    [self.postImageView.bottomAnchor constraintEqualToAnchor:view.bottomAnchor].active = YES;
     
 }
 
@@ -67,5 +64,11 @@
 {
     [super loadView];
     
+    UIView *view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    
+    // add subviews
+    self.view = view;
+    
+    [view addSubview:self.postImageView];
 }
 @end

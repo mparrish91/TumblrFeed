@@ -46,7 +46,7 @@
     self.postsTableView.delegate = self;
     self.postsTableView.dataSource = self;
 
-    
+    [self setConstraints];
     [self fetchTumblrPosts];
 
 }
@@ -125,6 +125,8 @@
 
 - (void)loadView
 {
+    [super loadView];
+
     UIView *view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
     // add subviews
