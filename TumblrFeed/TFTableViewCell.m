@@ -7,7 +7,8 @@
 //
 
 #import "TFTableViewCell.h"
-#import "AFNetworking.h"
+//#import "AFNetworking.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface TFTableViewCell ()
 
@@ -48,6 +49,8 @@
     [self.avatarImageView.topAnchor constraintEqualToAnchor:margins.topAnchor].active = YES;
     [self.avatarImageView.widthAnchor constraintEqualToAnchor:margins.widthAnchor constant:5].active = YES;
     [self.avatarImageView.heightAnchor constraintEqualToAnchor:margins.heightAnchor constant:5].active = YES;
+    self.avatarImageView.contentMode = UIViewContentModeScaleAspectFit;
+
     
     
     self.accountLabel.translatesAutoresizingMaskIntoConstraints = false;
@@ -66,20 +69,35 @@
     [self.postImageView.trailingAnchor constraintEqualToAnchor:margins.trailingAnchor].active = YES;
     [self.postImageView.topAnchor constraintEqualToAnchor:self.accountLabel.bottomAnchor].active = YES;
     [self.postImageView.bottomAnchor constraintEqualToAnchor:margins.bottomAnchor].active = YES;
+    self.postImageView.contentMode = UIViewContentModeScaleAspectFit;
+
 
 }
 
 
 #pragma mark - Accessing
 
+- (void)setPhotoImageURL:(NSString *)photoImageURL
+{
+    _photoImageURL = photoImageURL;
+    [self.avatarImageView setImageWithURL:[NSURL URLWithString:photoImageURL] placeholderImage:[UIImage imageNamed:@"placeholder"]];
 
-- (void)setAvatarImage:(UIImage*)image {
-    [self.avatarImageView setImageWithURL:[NSURL URLWithString:@"http://i.imgur.com/r4uwx.jpg"] placeholderImage:[UIImage imageNamed:@"placeholder-avatar"]];
+    
+    //FIXME: hack fix
+    NSString* avatarImagePath = @"https://api.tumblr.com/v2/blog/humansofnewyork.tumblr.com/avatar";
+    [self.avatarImageView setImageWithURL:[NSURL URLWithString:avatarImagePath] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+
+}
+
+
+
+- (void)setAvatarImageView:(UIImageView *)avatarImageView
+{
     
 }
 
-- (void)setPostImage:(UIImage*)image {
-    [self.postImageView setImageWithURL:[NSURL URLWithString:@"http://i.imgur.com/r4uwx.jpg"] placeholderImage:[UIImage imageNamed:@"placeholder-avatar"]];
+- (void)setPostImage:(NSString*)url {
+    [self.postImageView setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"placeholder-background"]];
     
 }
 

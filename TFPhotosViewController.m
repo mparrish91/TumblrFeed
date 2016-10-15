@@ -37,7 +37,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    self.title = @"Tumblr";
+
     
     NSString *cellIdentifier = @"cell";
     
@@ -82,6 +84,17 @@
                 }
             }
         }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.postsTableView reloadData];
+            if ([[NSThread currentThread] isMainThread]){
+                NSLog(@"In main thread--completion handler");
+            }
+            else{
+                NSLog(@"Not in main thread--completion handler");
+            }
+        });
+        
     }];
     [dataTask resume];
 }
@@ -102,22 +115,24 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"cell";
     TFTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier   forIndexPath:indexPath] ;
     
     if (cell == nil)
     {
         cell = [[TFTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    cell.accountLabel.text=[[self.posts objectAtIndex:indexPath.row] accountName];
-    cell.photoImageURL=[[self.posts objectAtIndex:indexPath.row] photoImageURL];
+    cell.accountLabel.text = [[self.posts objectAtIndex:indexPath.row] accountName];
+    cell.photoImageURL = [[self.posts objectAtIndex:indexPath.row] imagePath];
+    
     
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Your custom operation
+    [tableView deselectRowAtIndexPath:indexPath animated:true];
+    
     TFPhotoDetailViewController *detailVC = [[TFPhotoDetailViewController alloc]initWithURL:[[self.posts objectAtIndex:indexPath.row] photoImageURL]];
     [self.navigationController pushViewController:detailVC animated:true];
 }
@@ -140,13 +155,13 @@
 -(void)setConstraints
 {
     
-    UILayoutGuide *margins = self.view.layoutMarginsGuide;
+    UIView *view= self.view;
     
     self.postsTableView.translatesAutoresizingMaskIntoConstraints = false;
-    [self.postsTableView.leadingAnchor constraintEqualToAnchor:margins.leadingAnchor].active = YES;
-    [self.postsTableView.trailingAnchor constraintEqualToAnchor:margins.trailingAnchor].active = YES;
-    [self.postsTableView.topAnchor constraintEqualToAnchor:margins.topAnchor].active = YES;
-    [self.postsTableView.bottomAnchor constraintEqualToAnchor:margins.bottomAnchor].active = YES;
+    [self.postsTableView.leadingAnchor constraintEqualToAnchor:view.leadingAnchor].active = YES;
+    [self.postsTableView.trailingAnchor constraintEqualToAnchor:view.trailingAnchor].active = YES;
+    [self.postsTableView.topAnchor constraintEqualToAnchor:view.topAnchor].active = YES;
+    [self.postsTableView.bottomAnchor constraintEqualToAnchor:view.bottomAnchor].active = YES;
     
 }
 
