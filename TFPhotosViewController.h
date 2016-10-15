@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TFPhotosViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface TFPhotosViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 @end

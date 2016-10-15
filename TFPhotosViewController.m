@@ -158,6 +158,28 @@
     [self fetchTumblrPosts];
 }
 
+BOOL isMoreDataLoading = false;
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView; {
+    //Do your stuff here
+    // You can also track the direction of UIScrollView here.
+    
+    if (!isMoreDataLoading)
+    {
+        CGFloat scrollViewContentHeight = self.postsTableView.contentSize.height;
+        CGFloat scrollOffsetThreshold = scrollViewContentHeight - self.postsTableView.bounds.size.height;
+        
+        // When the user has scrolled past the threshold, start requesting
+        if(scrollView.contentOffset.y > scrollOffsetThreshold && self.postsTableView.dragging) {
+            isMoreDataLoading = true;
+            
+            [self fetchTumblrPosts];
+
+    }
+    
+}
+
+
 
 - (void)loadView
 {
@@ -166,7 +188,21 @@
     UIView *view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.view = view;
     [view addSubview:self.postsTableView];
+    [self initFooterView];
 
+}
+
+-(void)initFooterView
+{
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 50.0)];
+    UIActivityIndicatorView * loadingView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    
+    [loadingView startAnimating];
+    loadingView.center = footerView.center;
+    [footerView addSubview:loadingView];
+    
+    [self.postsTableView.tableFooterView addSubview:loadingView];
+    
 }
 
 

@@ -17,6 +17,7 @@
 		424946381DAFFF240053EA79 /* TFPhotoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 424946371DAFFF240053EA79 /* TFPhotoDetailViewController.m */; };
 		4249463F1DB00C250053EA79 /* TFPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 4249463E1DB00C250053EA79 /* TFPost.m */; };
 		424946421DB00CAE0053EA79 /* TFTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 424946411DB00CAE0053EA79 /* TFTableViewCell.m */; };
+		425603BA1DB2B965008F6BF8 /* InfiniteScrollActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 425603B91DB2B965008F6BF8 /* InfiniteScrollActivityView.m */; };
 		BF875D4FC2D01A84C57337C2 /* Pods_TumblrFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC3D5B9C7AB21035E90098F3 /* Pods_TumblrFeed.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,8 @@
 		424946401DB00CAE0053EA79 /* TFTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFTableViewCell.h; sourceTree = "<group>"; };
 		424946411DB00CAE0053EA79 /* TFTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFTableViewCell.m; sourceTree = "<group>"; };
 		424946431DB00EA80053EA79 /* TFPost-Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TFPost-Internal.h"; sourceTree = "<group>"; };
+		425603B81DB2B965008F6BF8 /* InfiniteScrollActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfiniteScrollActivityView.h; sourceTree = "<group>"; };
+		425603B91DB2B965008F6BF8 /* InfiniteScrollActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfiniteScrollActivityView.m; sourceTree = "<group>"; };
 		A50317F3F732E9A1E31AAEFD /* Pods-TumblrFeed.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TumblrFeed.release.xcconfig"; path = "Pods/Target Support Files/Pods-TumblrFeed/Pods-TumblrFeed.release.xcconfig"; sourceTree = "<group>"; };
 		BB013327B778C951BABDA27D /* Pods-TumblrFeed.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TumblrFeed.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TumblrFeed/Pods-TumblrFeed.debug.xcconfig"; sourceTree = "<group>"; };
 		CC3D5B9C7AB21035E90098F3 /* Pods_TumblrFeed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TumblrFeed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,6 +129,8 @@
 			children = (
 				424946401DB00CAE0053EA79 /* TFTableViewCell.h */,
 				424946411DB00CAE0053EA79 /* TFTableViewCell.m */,
+				425603B81DB2B965008F6BF8 /* InfiniteScrollActivityView.h */,
+				425603B91DB2B965008F6BF8 /* InfiniteScrollActivityView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -273,6 +278,7 @@
 				424946211DAFFEF50053EA79 /* AppDelegate.m in Sources */,
 				424946351DAFFF110053EA79 /* TFPhotosViewController.m in Sources */,
 				424946381DAFFF240053EA79 /* TFPhotoDetailViewController.m in Sources */,
+				425603BA1DB2B965008F6BF8 /* InfiniteScrollActivityView.m in Sources */,
 				424946421DB00CAE0053EA79 /* TFTableViewCell.m in Sources */,
 				4249461E1DAFFEF50053EA79 /* main.m in Sources */,
 				4249463F1DB00C250053EA79 /* TFPost.m in Sources */,
