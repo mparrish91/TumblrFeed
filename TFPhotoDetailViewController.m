@@ -22,7 +22,7 @@
 #pragma mark - Initialize
 
 
-- (instancetype)initWith:(NSString *)url
+- (instancetype)initWithURL:(NSString *)url
 {
     if (!(self = [super init]))
         return nil;

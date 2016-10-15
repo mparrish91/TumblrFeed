@@ -7,17 +7,32 @@
 //
 
 #import "TFPhotosViewController.h"
+#import "TFPhotoDetailViewController.h"
+#import "TFTableViewCell.h"
 #import "TFPost.h"
 
 
 @interface TFPhotosViewController ()
 
 @property(strong,readwrite,nonatomic) NSArray *posts;
+@property(nonatomic,strong) UITableView *postsTableView;
 
 
 @end
 
 @implementation TFPhotosViewController
+
+
+#pragma mark - Initialize
+- (instancetype)init
+{
+    self.postsTableView = [[UITableView alloc]init];
+
+    if (!(self = [super init]))
+        return nil;
+
+    return self;
+}
 
 
 - (void)viewDidLoad {
@@ -55,17 +70,60 @@
                     {
                         [objects addObject:object];
                     }
-                
-                self.posts = objects;
+                    self.posts = objects;
                 }
-            
             }
-
         }
-        
-    
     }];
     [dataTask resume];
+}
+
+
+
+#pragma mark - TableView
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    return self.posts.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 50;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
+    TFTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier   forIndexPath:indexPath] ;
+    
+    if (cell == nil)
+    {
+        cell = [[TFTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    cell.accountLabel.text=[[self.posts objectAtIndex:indexPath.row] accountName];
+    cell.photoImageURL=[[self.posts objectAtIndex:indexPath.row] photoImageURL];
+    
+    return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Your custom operation
+    TFPhotoDetailViewController *detailVC = [[TFPhotoDetailViewController alloc]initWithURL:[[self.posts objectAtIndex:indexPath.row] photoImageURL]];
+    [self.navigationController pushViewController:detailVC animated:true];
+}
+
+
+- (void)loadView
+{
+    UIView *view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    
+    // add subviews
+    self.view = view;
+    
+    [view addSubview:self.postsTableView];
 
 }
 

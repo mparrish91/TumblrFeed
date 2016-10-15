@@ -10,4 +10,8 @@
 
 @interface TFPhotoDetailViewController : UIViewController
 
+
+- (instancetype)initWithURL:(NSString *)url;
+
+
 @end

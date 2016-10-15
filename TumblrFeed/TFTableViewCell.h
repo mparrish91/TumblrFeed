@@ -10,6 +10,10 @@
 
 @interface TFTableViewCell : UITableViewCell
 
+@property(strong,nonatomic) UILabel *accountLabel;
+@property(strong,nonatomic) UIImage *avatarImage;
+@property(strong,nonatomic) UIImage *postImage;
 
+@property(strong,nonatomic) NSString *photoImageURL;
 
 @end
