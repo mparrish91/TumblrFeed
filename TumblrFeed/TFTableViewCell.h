@@ -11,8 +11,8 @@
 @interface TFTableViewCell : UITableViewCell
 
 @property(strong,nonatomic) UILabel *accountLabel;
-@property(strong,nonatomic) UIImageView *avatarImage;
-@property(strong,nonatomic) UIImageView *postImage;
+@property(strong,nonatomic) UIImageView *avatarImageView;
+@property(strong,nonatomic) UIImageView *postImageView;
 
 @property(strong,nonatomic) NSString *photoImageURL;
 

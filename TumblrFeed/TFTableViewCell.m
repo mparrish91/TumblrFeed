@@ -22,17 +22,17 @@
 {
     
     self.accountLabel = [[UILabel alloc]init];
-    self.avatarImage = [[UIImageView alloc]init];
-    self.postImage = [[UIImageView alloc]init];
+    self.avatarImageView = [[UIImageView alloc]init];
+    self.postImageView = [[UIImageView alloc]init];
     self.photoImageURL = [[NSString alloc]init];
 
     
     if (!(self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]))
         return nil;
     
-    [[self contentView]addSubview:_avatarImage];
-    [[self contentView]addSubview:_postImage];
-    [[self contentView]addSubview:_accountLabel];
+    [[self contentView]addSubview:self.avatarImageView];
+    [[self contentView]addSubview:self.postImageView];
+    [[self contentView]addSubview:self.accountLabel];
     
     
     return self;
@@ -43,11 +43,11 @@
     
     UILayoutGuide *margins = self.contentView.layoutMarginsGuide;
     
-    self.avatarImage.translatesAutoresizingMaskIntoConstraints = false;
-    [self.avatarImage.leadingAnchor constraintEqualToAnchor:margins.leadingAnchor].active = YES;
-    [self.avatarImage.topAnchor constraintEqualToAnchor:margins.topAnchor].active = YES;
-    [self.avatarImage.widthAnchor constraintEqualToAnchor:margins.widthAnchor constant:5].active = YES;
-    [self.avatarImage.heightAnchor constraintEqualToAnchor:margins.heightAnchor constant:5].active = YES;
+    self.avatarImageView.translatesAutoresizingMaskIntoConstraints = false;
+    [self.avatarImageView.leadingAnchor constraintEqualToAnchor:margins.leadingAnchor].active = YES;
+    [self.avatarImageView.topAnchor constraintEqualToAnchor:margins.topAnchor].active = YES;
+    [self.avatarImageView.widthAnchor constraintEqualToAnchor:margins.widthAnchor constant:5].active = YES;
+    [self.avatarImageView.heightAnchor constraintEqualToAnchor:margins.heightAnchor constant:5].active = YES;
     
     
     self.accountLabel.translatesAutoresizingMaskIntoConstraints = false;
@@ -60,6 +60,13 @@
     [self.accountLabel.centerXAnchor constraintEqualToAnchor:self.accountLabel.centerXAnchor].active = YES;
     [self.accountLabel.leadingAnchor constraintEqualToAnchor:self.accountLabel.trailingAnchor].active = YES;
  
+    
+    self.postImageView.translatesAutoresizingMaskIntoConstraints = false;
+    [self.postImageView.leadingAnchor constraintEqualToAnchor:margins.leadingAnchor].active = YES;
+    [self.postImageView.trailingAnchor constraintEqualToAnchor:margins.trailingAnchor].active = YES;
+    [self.postImageView.topAnchor constraintEqualToAnchor:self.accountLabel.bottomAnchor].active = YES;
+    [self.postImageView.bottomAnchor constraintEqualToAnchor:margins.bottomAnchor].active = YES;
+
 }
 
 
@@ -67,15 +74,13 @@
 
 
 - (void)setAvatarImage:(UIImage*)image {
-//    [_avatarImage setImageWithURL:[NSURL URLWithString:@"http://i.imgur.com/r4uwx.jpg"] placeholderImage:[UIImage imageNamed:@"placeholder-avatar"]];
-
-    _avatarImage = image;
+    [self.avatarImageView setImageWithURL:[NSURL URLWithString:@"http://i.imgur.com/r4uwx.jpg"] placeholderImage:[UIImage imageNamed:@"placeholder-avatar"]];
+    
 }
 
 - (void)setPostImage:(UIImage*)image {
-//    [_postImage setImageWithURL:[NSURL URLWithString:@"http://i.imgur.com/r4uwx.jpg"] placeholderImage:[UIImage imageNamed:@"placeholder-avatar"]];
+    [self.postImageView setImageWithURL:[NSURL URLWithString:@"http://i.imgur.com/r4uwx.jpg"] placeholderImage:[UIImage imageNamed:@"placeholder-avatar"]];
     
-    _avatarImage = image;
 }
 
 @end
