@@ -72,13 +72,13 @@
     [self.postImageView.leadingAnchor constraintEqualToAnchor:margins.leadingAnchor].active = YES;
     [self.postImageView.trailingAnchor constraintEqualToAnchor:margins.trailingAnchor].active = YES;
     [self.postImageView.topAnchor constraintEqualToAnchor:self.accountLabel.bottomAnchor].active = YES;
-    [self.postImageView.bottomAnchor constraintEqualToAnchor:margins.bottomAnchor constant:20].active = YES;
+    [self.postImageView.bottomAnchor constraintEqualToAnchor:margins.bottomAnchor constant:-10].active = YES;
     self.postImageView.contentMode = UIViewContentModeScaleAspectFit;
     
     
     self.timeLabel.translatesAutoresizingMaskIntoConstraints = false;
     [self.timeLabel.leadingAnchor constraintEqualToAnchor:margins.leadingAnchor].active = YES;
-    [self.timeLabel.topAnchor constraintEqualToAnchor:self.postImageView.bottomAnchor constant:5].active = YES;
+    [self.timeLabel.topAnchor constraintEqualToAnchor:self.postImageView.bottomAnchor constant:-5].active = YES;
     self.timeLabel.font = [UIFont fontWithName:@"Avenir-Book" size:9];
     self.timeLabel.textColor = [UIColor grayColor];
 
