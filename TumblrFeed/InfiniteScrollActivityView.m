@@ -30,6 +30,7 @@
     if (!(self = [super initWithFrame:frame]))
         return nil;
     
+    [self setupActivityIndicator];
     
     return self;
 }
@@ -56,9 +57,9 @@
 }
 
 + (CGFloat )defaultHeight {
-    static CGFloat height = nil;
-    if (height == nil) {
-        // create dict
+    static CGFloat height = -1;
+    if (height == -1) {
+         height = 60;
     }
     return height;
 }
