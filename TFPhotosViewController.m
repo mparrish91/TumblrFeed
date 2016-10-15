@@ -11,6 +11,7 @@
 #import "TFTableViewCell.h"
 #import "TFPost.h"
 #import "UIImageView+AFNetworking.h"
+#import "TFInfiniteScrollActivityView.h"
 
 
 @interface TFPhotosViewController ()
@@ -18,6 +19,11 @@
 @property(strong,readwrite,nonatomic) NSArray *posts;
 @property(nonatomic,strong) UITableView *postsTableView;
 @property(nonatomic,strong) UIRefreshControl *refreshControl;
+@property (nonatomic,assign) BOOL isMoreDataLoading;
+
+@property(nonatomic,strong) TFInfiniteScrollActivityView *loadingMoreView;
+
+
 
 
 @end
@@ -52,6 +58,15 @@
     [self.refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
 
 
+    CGRect frame = CGRectMake(0, self.postsTableView.contentSize.height, self.postsTableView.bounds.size.width, TFInfiniteScrollActivityView.defaultHeight);
+    self.loadingMoreView = [[TFInfiniteScrollActivityView alloc]initWithFrame:frame];
+    self.loadingMoreView.hidden = true;
+    [self.postsTableView addSubview:self.loadingMoreView];
+    
+   UIEdgeInsets insets = self.postsTableView.contentInset;
+    insets.bottom += TFInfiniteScrollActivityView.defaultHeight;
+    self.postsTableView.contentInset = insets;
+    
     [self setConstraints];
     [self fetchTumblrPosts];
 
@@ -92,6 +107,9 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.postsTableView reloadData];
             [self.refreshControl endRefreshing];
+            self.isMoreDataLoading = false;
+            [self.loadingMoreView startAnimating];
+
 
             if ([[NSThread currentThread] isMainThread]){
                 NSLog(@"In main thread--completion handler");
@@ -158,23 +176,28 @@
     [self fetchTumblrPosts];
 }
 
-BOOL isMoreDataLoading = false;
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView; {
     //Do your stuff here
     // You can also track the direction of UIScrollView here.
     
-    if (!isMoreDataLoading)
+    if (!self.isMoreDataLoading)
     {
         CGFloat scrollViewContentHeight = self.postsTableView.contentSize.height;
         CGFloat scrollOffsetThreshold = scrollViewContentHeight - self.postsTableView.bounds.size.height;
         
         // When the user has scrolled past the threshold, start requesting
         if(scrollView.contentOffset.y > scrollOffsetThreshold && self.postsTableView.dragging) {
-            isMoreDataLoading = true;
+            self.isMoreDataLoading = true;
+            
+            CGRect frame = CGRectMake(0, self.postsTableView.contentSize.height, self.postsTableView.bounds.size.width, TFInfiniteScrollActivityView.defaultHeight);
+            self.loadingMoreView.frame = frame;
+            [self.loadingMoreView startAnimating];
+
             
             [self fetchTumblrPosts];
 
+    }
     }
     
 }
@@ -188,7 +211,7 @@ BOOL isMoreDataLoading = false;
     UIView *view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.view = view;
     [view addSubview:self.postsTableView];
-    [self initFooterView];
+//    [self initFooterView];
 
 }
 

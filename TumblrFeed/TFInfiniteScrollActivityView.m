@@ -1,19 +1,18 @@
 //
-//  InfiniteScrollActivityView.m
+//  TFInfiniteScrollActivityView.m
 //  TumblrFeed
 //
 //  Created by parry on 10/15/16.
 //  Copyright © 2016 parry. All rights reserved.
 //
 
-#import "InfiniteScrollActivityView.h"
+#import "TFInfiniteScrollActivityView.h"
 
-@interface InfiniteScrollActivityView ()
+@interface TFInfiniteScrollActivityView ()
 
 @property(strong,nonatomic) UIActivityIndicatorView *activityIndicatorView;
 //@property(strong,nonatomic) static CGFloat defaultHeight = 60;
 
-+ (CGFloat)defaultHeight;
 
 
 
@@ -21,7 +20,7 @@
 
 
 
-@implementation InfiniteScrollActivityView
+@implementation TFInfiniteScrollActivityView
 
 
 
