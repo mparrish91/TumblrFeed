@@ -125,7 +125,11 @@
     }
     cell.accountLabel.text = [[self.posts objectAtIndex:indexPath.row] accountName];
     NSString *photoImageURL = [[self.posts objectAtIndex:indexPath.row] imagePath];
-    [cell.postImageView setImageWithURL:[NSURL URLWithString:photoImageURL] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    NSString *avatarImageURL = [[self.posts objectAtIndex:indexPath.row] avatarImagePath];
+
+    [cell.postImageView setImageWithURL:[NSURL URLWithString:photoImageURL] placeholderImage:[UIImage imageNamed:@"placeholder-background"]];
+    [cell.avatarImageView setImageWithURL:[NSURL URLWithString:avatarImageURL] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
     
     return cell;
@@ -135,7 +139,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:true];
     
-    TFPhotoDetailViewController *detailVC = [[TFPhotoDetailViewController alloc]initWithURL:[[self.posts objectAtIndex:indexPath.row] photoImageURL]];
+    TFPhotoDetailViewController *detailVC = [[TFPhotoDetailViewController alloc]initWithURL:[[self.posts objectAtIndex:indexPath.row] imagePath]];
     [self.navigationController pushViewController:detailVC animated:true];
 }
 
@@ -145,10 +149,7 @@
     [super loadView];
 
     UIView *view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    
-    // add subviews
     self.view = view;
-    
     [view addSubview:self.postsTableView];
 
 }

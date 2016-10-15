@@ -7,11 +7,13 @@
 //
 
 #import "TFPhotoDetailViewController.h"
+#import "UIImageView+AFNetworking.h"
+
 
 @interface TFPhotoDetailViewController ()
 
 @property(strong,nonatomic) UIImageView *postImageView;
-
+@property(strong,readwrite,nonatomic) NSString *url;
 
 
 @end
@@ -24,10 +26,14 @@
 
 - (instancetype)initWithURL:(NSString *)url
 {
+    self.postImageView = [[UIImageView alloc]init];
+
     if (!(self = [super init]))
         return nil;
     
-//    [postImage setImageWithURL:[NSURL URLWithString:@"http://i.imgur.com/r4uwx.jpg"] placeholderImage:[UIImage imageNamed:@"placeholder-avatar"]];
+    self.url = url;
+
+    
     return  self;
 
 }
@@ -39,8 +45,22 @@
     [super viewDidLoad];
     
     [self setConstraints];
+    [self.postImageView setImageWithURL:[NSURL URLWithString:self.url] placeholderImage:[UIImage imageNamed:@"placeholder-background"]];
 
 
+}
+
+- (void)loadView
+{
+    [super loadView];
+    
+    UIView *view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    
+    // add subviews
+    self.view = view;
+    view.backgroundColor = [UIColor whiteColor];
+    
+    [view addSubview:self.postImageView];
 }
 
 
@@ -56,19 +76,10 @@
     [self.postImageView.trailingAnchor constraintEqualToAnchor:view.trailingAnchor].active = YES;
     [self.postImageView.topAnchor constraintEqualToAnchor:view.topAnchor].active = YES;
     [self.postImageView.bottomAnchor constraintEqualToAnchor:view.bottomAnchor].active = YES;
-    
+    self.postImageView.contentMode = UIViewContentModeScaleAspectFit;
+
 }
 
 
-- (void)loadView
-{
-    [super loadView];
-    
-    UIView *view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    
-    // add subviews
-    self.view = view;
-    
-    [view addSubview:self.postImageView];
-}
+
 @end

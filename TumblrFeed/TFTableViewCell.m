@@ -47,21 +47,23 @@
     self.avatarImageView.translatesAutoresizingMaskIntoConstraints = false;
     [self.avatarImageView.leadingAnchor constraintEqualToAnchor:margins.leadingAnchor].active = YES;
     [self.avatarImageView.topAnchor constraintEqualToAnchor:margins.topAnchor].active = YES;
-    [self.avatarImageView.widthAnchor constraintEqualToAnchor:margins.widthAnchor constant:5].active = YES;
-    [self.avatarImageView.heightAnchor constraintEqualToAnchor:margins.heightAnchor constant:5].active = YES;
+    [self.avatarImageView.widthAnchor constraintEqualToConstant:3];
+    [self.avatarImageView.heightAnchor constraintEqualToConstant:3];
     self.avatarImageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.avatarImageView.layer.cornerRadius = 15;
+    self.avatarImageView.layer.masksToBounds = YES;
+
+
 
     
     self.accountLabel.translatesAutoresizingMaskIntoConstraints = false;
-//    [self.accountLabel.centerYAnchor constraintEqualToAnchor:self.avatarImageView.centerYAnchor].active = YES;
-//    [self.accountLabel.leadingAnchor constraintEqualToAnchor:self.avatarImageView.trailingAnchor constant:1].active = YES;
-    
-    [self.accountLabel.trailingAnchor constraintEqualToAnchor:margins.leadingAnchor constant:10];
-    [self.accountLabel.topAnchor constraintEqualToAnchor:margins.topAnchor].active = YES;
+    [self.accountLabel.centerYAnchor constraintEqualToAnchor:self.avatarImageView.centerYAnchor].active = YES;
+    [self.accountLabel.leadingAnchor constraintEqualToAnchor:self.avatarImageView.trailingAnchor constant:1].active = YES;
+    self.accountLabel.font = [UIFont fontWithName:@"Avenir-Book" size:9];
+    self.accountLabel.textColor = [UIColor blueColor];
 
-     self.accountLabel.font = [UIFont fontWithName:@"Avenir-Book" size:9];
 
-//    
+
     self.postImageView.translatesAutoresizingMaskIntoConstraints = false;
     [self.postImageView.leadingAnchor constraintEqualToAnchor:margins.leadingAnchor].active = YES;
     [self.postImageView.trailingAnchor constraintEqualToAnchor:margins.trailingAnchor].active = YES;
@@ -75,28 +77,11 @@
 
 #pragma mark - Accessing
 
-//- (void)setPhotoImageURL:(NSString *)photoImageURL
-//{
-//    _photoImageURL = photoImageURL;
-//    [self.avatarImageView setImageWithURL:[NSURL URLWithString:photoImageURL] placeholderImage:[UIImage imageNamed:@"placeholder"]];
-//
-//    
-//    //FIXME: hack fix
-//    NSString* avatarImagePath = @"https://api.tumblr.com/v2/blog/humansofnewyork.tumblr.com/avatar";
-//    [self.avatarImageView setImageWithURL:[NSURL URLWithString:avatarImagePath] placeholderImage:[UIImage imageNamed:@"placeholder"]];
-//
-//}
 
 
 
-- (void)setAvatarImageView:(UIImageView *)avatarImageView
-{
-    
-}
 
-- (void)setPostImage:(NSString*)url {
-    [self.postImageView setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"placeholder-background"]];
-    
-}
+
+
 
 @end
