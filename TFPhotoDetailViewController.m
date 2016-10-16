@@ -8,6 +8,7 @@
 
 #import "TFPhotoDetailViewController.h"
 #import "UIImageView+AFNetworking.h"
+#import "TFPhotoDetailViewController.h"
 
 
 @interface TFPhotoDetailViewController ()
@@ -46,6 +47,9 @@
     
     [self setConstraints];
     [self.postImageView setImageWithURL:[NSURL URLWithString:self.url] placeholderImage:[UIImage imageNamed:@"placeholder-background"]];
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapped:)];
+
 
 
 }
@@ -61,6 +65,20 @@
     view.backgroundColor = [UIColor whiteColor];
     
     [view addSubview:self.postImageView];
+}
+
+- (void)imageTapped:(UITapGestureRecognizer *)sender
+{
+    UIView *theSuperview = self.view; // whatever view contains your image views
+    CGPoint touchPointInSuperview = [sender locationInView:theSuperview];
+    UIView *touchedView = [theSuperview hitTest:touchPointInSuperview withEvent:nil];
+    if([touchedView isKindOfClass:[UIImageView class]])
+    {
+        TFPhotoDetailViewController *detailVC = [[TFPhotoDetailViewController alloc]initWithURL:self.url];
+        [self presentModalViewController:detailVC animated:YES];
+
+    
+    }
 }
 
 
