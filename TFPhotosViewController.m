@@ -149,6 +149,15 @@
     
     [profileView setImageWithURL:[NSURL URLWithString:@"https://api.tumblr.com/v2/blog/humansofnewyork.tumblr.com/avatar"] placeholderImage:[UIImage imageNamed:@"placeholder"]];
     [headerView addSubview:profileView];
+    
+    UILabel *accountLabel = [[UILabel alloc]initWithFrame:CGRectMake(50, 10, 80, 30)];
+    TFPost *post = [self.posts objectAtIndex:section];
+    accountLabel.text = [post accountName];
+    accountLabel.font = [UIFont fontWithName:@"Avenir-Book" size:9];
+    accountLabel.textColor = [UIColor blueColor];
+
+    [headerView addSubview:accountLabel];
+
  
     return headerView;
 }
@@ -171,7 +180,7 @@
     {
         cell = [[TFTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    TFPost *post = [self.posts objectAtIndex:indexPath.row];
+    TFPost *post = [self.posts objectAtIndex:indexPath.section];
     cell.accountLabel.text = [post accountName];
     cell.timeLabel.text = [self convertStringToDate:post.date];
     NSString *photoImageURL = [post imagePath];
