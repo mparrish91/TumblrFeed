@@ -50,7 +50,18 @@
     
     [self.imageScrollView addSubview:self.postImageView];
     self.imageScrollView.bounces = NO;
+    self.imageScrollView.userInteractionEnabled = YES;
+    self.imageScrollView.minimumZoomScale = 0.5;
+    self.imageScrollView.maximumZoomScale = 2.0;;
+    self.imageScrollView.delegate = self;
+
     self.postImageView.frame = CGRectMake (0,0,self.imageScrollView.frame.size.width,self.imageScrollView.frame.size.height);
+    
+    UISwipeGestureRecognizer *rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleRightSwipe:)];
+    rightSwipe.direction = UISwipeGestureRecognizerDirectionRight;
+    rightSwipe.numberOfTouchesRequired = 1;
+    [self.imageScrollView addGestureRecognizer:rightSwipe];
+    
     
     
     [self setConstraints];
@@ -58,6 +69,28 @@
     
     
 }
+
+
+- (UIView*)viewForZoomingInScrollView:(UIScrollView *)aScrollView {
+    return self.imageScrollView;
+}
+
+- (void)handleRightSwipe
+{
+    
+}
+
+// disable scrolling in the scroll view when the image is not zoomed in
+- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
+    if (scrollView.zoomScale!=1.0) {
+        // Zooming, enable scrolling
+        scrollView.scrollEnabled = TRUE;
+    } else {
+        // Not zoomed, disable scrolling so gestures get used instead
+        scrollView.scrollEnabled = FALSE;
+    }
+}
+
 
 - (void)loadView
 {

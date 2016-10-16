@@ -16,7 +16,7 @@
 
 @interface TFPhotosViewController ()
 
-@property(strong,readwrite,nonatomic) NSArray *posts;
+@property(strong,readwrite,nonatomic) NSMutableArray *posts;
 @property(nonatomic,strong) UITableView *postsTableView;
 @property(nonatomic,strong) UIRefreshControl *refreshControl;
 @property (nonatomic,assign) BOOL isMoreDataLoading;
@@ -35,6 +35,8 @@
 - (instancetype)init
 {
     self.postsTableView = [[UITableView alloc]init];
+    self.posts = [[NSMutableArray alloc] init];
+
 
     if (!(self = [super init]))
         return nil;
@@ -67,6 +69,7 @@
     insets.bottom += TFInfiniteScrollActivityView.defaultHeight;
     self.postsTableView.contentInset = insets;
     
+
     [self setConstraints];
     [self fetchTumblrPosts];
 
@@ -90,8 +93,8 @@
             {
                 NSDictionary *results = JSONObject;
                 NSMutableArray *objects = [[NSMutableArray alloc] init];
-                
-                NSArray *posts = results[@"response"][@"posts"];
+
+                NSMutableArray *posts = results[@"response"][@"posts"];
                 
                 for (NSDictionary *post in posts) {
                     TFPost *object = [[TFPost alloc] initWithServerRepresentation:post];
@@ -99,7 +102,11 @@
                     {
                         [objects addObject:object];
                     }
-                    self.posts = objects;
+//                    self.posts = objects;
+                    [self.posts addObjectsFromArray:objects];
+                    
+                    
+
                 }
             }
         }
@@ -200,7 +207,8 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:true];
     
-    TFPhotoDetailViewController *detailVC = [[TFPhotoDetailViewController alloc]initWithURL:[[self.posts objectAtIndex:indexPath.row] imagePath]];
+    TFPost *post = [self.posts objectAtIndex:indexPath.section];
+    TFPhotoDetailViewController *detailVC = [[TFPhotoDetailViewController alloc]initWithURL:[post imagePath]];
     [self.navigationController pushViewController:detailVC animated:true];
 }
 

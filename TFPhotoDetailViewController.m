@@ -49,6 +49,7 @@
     [self.postImageView setImageWithURL:[NSURL URLWithString:self.url] placeholderImage:[UIImage imageNamed:@"placeholder-background"]];
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapped:)];
+    [self.view addGestureRecognizer:tapGesture];
 
 
 
@@ -72,13 +73,8 @@
     UIView *theSuperview = self.view; // whatever view contains your image views
     CGPoint touchPointInSuperview = [sender locationInView:theSuperview];
     UIView *touchedView = [theSuperview hitTest:touchPointInSuperview withEvent:nil];
-    if([touchedView isKindOfClass:[UIImageView class]])
-    {
-        TFPhotoDetailViewController *detailVC = [[TFPhotoDetailViewController alloc]initWithURL:self.url];
-        [self presentModalViewController:detailVC animated:YES];
-
-    
-    }
+    TFPhotoDetailViewController *detailVC = [[TFPhotoDetailViewController alloc]initWithURL:self.url];
+    [self presentModalViewController:detailVC animated:YES];
 }
 
 
