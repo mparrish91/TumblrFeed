@@ -21,10 +21,10 @@
 @property(nonatomic,strong) UIRefreshControl *refreshControl;
 @property (nonatomic,assign) BOOL isMoreDataLoading;
 
+@property (assign) int offset;
+
+
 @property(nonatomic,strong) TFInfiniteScrollActivityView *loadingMoreView;
-
-
-
 
 @end
 
@@ -32,6 +32,7 @@
 
 
 #pragma mark - Initialize
+
 - (instancetype)init
 {
     self.postsTableView = [[UITableView alloc]init];
@@ -78,7 +79,7 @@
 
 - (void)fetchTumblrPosts
 {
-    NSString *apiKey = @"Q6vHoaVm5L1u2ZAW1fqv3Jw48gFzYVg9P0vH0VHl3GVy6quoGV";
+    NSString *apiKey = [NSString stringWithFormat:@"Q6vHoaVm5L1u2ZAW1fqv3Jw48gFzYVg9P0vH0VHl3GVy6quoGV&offset=%d", self.offset];
     NSURL *url = [NSURL URLWithString:[@"https://api.tumblr.com/v2/blog/humansofnewyork.tumblr.com/posts/photo?api_key=" stringByAppendingString:apiKey]];
     
     NSURLSession *session = [NSURLSession sharedSession];
@@ -102,10 +103,9 @@
                     {
                         [objects addObject:object];
                     }
-//                    self.posts = objects;
                     [self.posts addObjectsFromArray:objects];
-                    
-                    
+                                        
+                    self.offset++;
 
                 }
             }
@@ -189,7 +189,7 @@
     }
     TFPost *post = [self.posts objectAtIndex:indexPath.section];
     cell.accountLabel.text = [post accountName];
-    cell.timeLabel.text = [self convertStringToDate:post.date];
+    cell.timeLabel.text = [self convertDateToString:post.date];
     NSString *photoImageURL = [post imagePath];
     NSString *avatarImageURL = [post avatarImagePath];
 
@@ -284,7 +284,7 @@
     
 }
      
-- (NSString *)convertStringToDate: (NSDate *)date
+- (NSString *)convertDateToString: (NSDate *)date
 {
          
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
