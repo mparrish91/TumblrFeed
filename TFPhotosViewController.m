@@ -60,12 +60,6 @@
     [self.postsTableView addSubview:self.refreshControl];
     [self.refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
 
-
-    CGRect frame = CGRectMake(0, self.postsTableView.contentSize.height, self.postsTableView.bounds.size.width, TFInfiniteScrollActivityView.defaultHeight);
-    self.loadingMoreView = [[TFInfiniteScrollActivityView alloc]initWithFrame:frame];
-    self.loadingMoreView.hidden = true;
-    [self.postsTableView addSubview:self.loadingMoreView];
-    
    UIEdgeInsets insets = self.postsTableView.contentInset;
     insets.bottom += TFInfiniteScrollActivityView.defaultHeight;
     self.postsTableView.contentInset = insets;
@@ -73,8 +67,13 @@
 
     [self setConstraints];
     [self fetchTumblrPosts];
+    
+
+    
 
 }
+
+
 
 
 - (void)fetchTumblrPosts
@@ -252,6 +251,16 @@
     self.view = view;
     [view addSubview:self.postsTableView];
 //    [self initFooterView];
+    
+
+
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+
+    [self setupInfiniteScrollView];
 
 }
 
@@ -280,7 +289,17 @@
     [self.postsTableView.topAnchor constraintEqualToAnchor:view.topAnchor].active = YES;
     [self.postsTableView.bottomAnchor constraintEqualToAnchor:view.bottomAnchor].active = YES;
     
+    
 }
+
+- (void)setupInfiniteScrollView
+{
+    CGRect frame = CGRectMake(0, self.postsTableView.contentSize.height, self.postsTableView.bounds.size.width, TFInfiniteScrollActivityView.defaultHeight);
+    self.loadingMoreView = [[TFInfiniteScrollActivityView alloc]initWithFrame:frame];
+    self.loadingMoreView.hidden = true;
+    [self.postsTableView addSubview:self.loadingMoreView];
+}
+
      
 - (NSString *)convertDateToString: (NSDate *)date
 {
