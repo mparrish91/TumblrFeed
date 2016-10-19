@@ -103,11 +103,9 @@
                     {
                         [objects addObject:object];
                     }
-                    [self.posts addObjectsFromArray:objects];
-                    
-                    self.offset++;
-
                 }
+                [self.posts addObjectsFromArray:objects];
+                self.offset = self.offset + 20;
             }
         }
         
