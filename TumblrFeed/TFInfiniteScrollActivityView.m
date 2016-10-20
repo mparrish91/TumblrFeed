@@ -11,7 +11,6 @@
 @interface TFInfiniteScrollActivityView ()
 
 @property(strong,nonatomic) UIActivityIndicatorView *activityIndicatorView;
-//@property(strong,nonatomic) static CGFloat defaultHeight = 60;
 
 
 
@@ -49,7 +48,9 @@
 
 - (void)setupActivityIndicator
 {
-    self.activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+    self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+
+//    self.activityIndicatorView = UIActivityIndicatorViewStyleGray;
     self.activityIndicatorView.hidesWhenStopped = true;
     [self addSubview: self.activityIndicatorView];
 

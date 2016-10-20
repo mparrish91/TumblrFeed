@@ -112,7 +112,7 @@
             [self.postsTableView reloadData];
             [self.refreshControl endRefreshing];
             self.isMoreDataLoading = false;
-            [self.loadingMoreView startAnimating];
+//            [self.loadingMoreView stopAnimating];
 
 
             if ([[NSThread currentThread] isMainThread]){
@@ -296,7 +296,9 @@
 {
     CGRect frame = CGRectMake(0, self.postsTableView.contentSize.height, self.postsTableView.bounds.size.width, TFInfiniteScrollActivityView.defaultHeight);
     self.loadingMoreView = [[TFInfiniteScrollActivityView alloc]initWithFrame:frame];
-    self.loadingMoreView.hidden = true;
+//    self.loadingMoreView.hidden = true;
+        self.loadingMoreView.backgroundColor = [UIColor redColor];
+
     [self.postsTableView addSubview:self.loadingMoreView];
 }
 
