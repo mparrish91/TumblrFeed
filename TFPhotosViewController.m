@@ -112,7 +112,7 @@
             [self.postsTableView reloadData];
             [self.refreshControl endRefreshing];
             self.isMoreDataLoading = false;
-//            [self.loadingMoreView stopAnimating];
+            [self.loadingMoreView stopAnimating];
 
 
             if ([[NSThread currentThread] isMainThread]){
@@ -210,8 +210,6 @@
 }
 
 - (void)refreshTable {
-    //TODO: refresh your data
-    
     [self fetchTumblrPosts];
 }
 
@@ -296,9 +294,7 @@
 {
     CGRect frame = CGRectMake(0, self.postsTableView.contentSize.height, self.postsTableView.bounds.size.width, TFInfiniteScrollActivityView.defaultHeight);
     self.loadingMoreView = [[TFInfiniteScrollActivityView alloc]initWithFrame:frame];
-//    self.loadingMoreView.hidden = true;
-        self.loadingMoreView.backgroundColor = [UIColor redColor];
-
+    self.loadingMoreView.hidden = true;
     [self.postsTableView addSubview:self.loadingMoreView];
 }
 
