@@ -74,7 +74,7 @@
     
     
     [self.closeButton addTarget:self
-               action:@selector(onCloseButtonTapped:)
+               action:@selector(onCloseButtonTapped)
      forControlEvents:UIControlEventTouchUpInside];
     
 }
@@ -143,6 +143,8 @@
     [self.closeButton.trailingAnchor constraintEqualToAnchor:view.layoutMarginsGuide.trailingAnchor].active = YES;
     [self.closeButton.topAnchor constraintEqualToAnchor:view.layoutMarginsGuide.topAnchor].active = YES;
     [self.closeButton setTitle:@"Close" forState:UIControlStateNormal];
+    [self.closeButton setTitleColor: [UIColor blueColor] forState:UIControlStateNormal];
+
 
     
 }

@@ -10,4 +10,6 @@
 
 @interface TFFullScreenPhotoViewController : UIViewController <UIScrollViewDelegate>
 
+- (instancetype)initWithURL:(NSString *)url;
+
 @end

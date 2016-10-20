@@ -9,6 +9,7 @@
 #import "TFPhotoDetailViewController.h"
 #import "UIImageView+AFNetworking.h"
 #import "TFPhotoDetailViewController.h"
+#import "TFFullScreenPhotoViewController.h"
 
 
 @interface TFPhotoDetailViewController ()
@@ -47,9 +48,11 @@
     
     [self setConstraints];
     [self.postImageView setImageWithURL:[NSURL URLWithString:self.url] placeholderImage:[UIImage imageNamed:@"placeholder-background"]];
-    
+
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapped:)];
-    [self.view addGestureRecognizer:tapGesture];
+    [self.postImageView setUserInteractionEnabled:YES];
+    [self.postImageView addGestureRecognizer:tapGesture];
+
 
 
 
@@ -70,11 +73,8 @@
 
 - (void)imageTapped:(UITapGestureRecognizer *)sender
 {
-    UIView *theSuperview = self.view; // whatever view contains your image views
-    CGPoint touchPointInSuperview = [sender locationInView:theSuperview];
-    UIView *touchedView = [theSuperview hitTest:touchPointInSuperview withEvent:nil];
-    TFPhotoDetailViewController *detailVC = [[TFPhotoDetailViewController alloc]initWithURL:self.url];
-    [self presentModalViewController:detailVC animated:YES];
+    TFFullScreenPhotoViewController *fullScreenVC = [[TFFullScreenPhotoViewController alloc]initWithURL:self.url];
+    [self presentViewController:fullScreenVC animated:true completion:nil];
 }
 
 
