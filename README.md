@@ -8,7 +8,8 @@ Time spent: 11 hours spent in total
 Completed user stories:
 
 **required** functionality is completed:
-**required** optional functionality is completed:
+
+**optional**  functionality is completed:
 
 Notes:
 
