@@ -57,17 +57,8 @@
     self.imageScrollView.bounces = NO;
     self.imageScrollView.userInteractionEnabled = YES;
     self.imageScrollView.minimumZoomScale = 0.5;
-    self.imageScrollView.maximumZoomScale = 2.0;;
+    self.imageScrollView.maximumZoomScale = 5.0;;
     self.imageScrollView.delegate = self;
-
-    self.postImageView.frame = CGRectMake (0,0,self.imageScrollView.frame.size.width,self.imageScrollView.frame.size.height);
-    
-    UISwipeGestureRecognizer *rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleRightSwipe:)];
-    rightSwipe.direction = UISwipeGestureRecognizerDirectionRight;
-    rightSwipe.numberOfTouchesRequired = 1;
-    [self.imageScrollView addGestureRecognizer:rightSwipe];
-    
-    
     
     [self setConstraints];
     [self.postImageView setImageWithURL:[NSURL URLWithString:self.url] placeholderImage:[UIImage imageNamed:@"placeholder-background"]];
@@ -77,17 +68,17 @@
                action:@selector(onCloseButtonTapped)
      forControlEvents:UIControlEventTouchUpInside];
     
+
+    
 }
+
 
 
 - (UIView*)viewForZoomingInScrollView:(UIScrollView *)aScrollView {
-    return self.imageScrollView;
+    return self.postImageView;
 }
 
-- (void)handleRightSwipe
-{
-    
-}
+
 
 // disable scrolling in the scroll view when the image is not zoomed in
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView {
@@ -138,12 +129,21 @@
     [self.imageScrollView.topAnchor constraintEqualToAnchor:view.topAnchor].active = YES;
     [self.imageScrollView.bottomAnchor constraintEqualToAnchor:view.bottomAnchor].active = YES;
     self.imageScrollView.contentMode = UIViewContentModeScaleToFill;
-
+    
     self.closeButton.translatesAutoresizingMaskIntoConstraints = false;
     [self.closeButton.trailingAnchor constraintEqualToAnchor:view.layoutMarginsGuide.trailingAnchor].active = YES;
-    [self.closeButton.topAnchor constraintEqualToAnchor:view.layoutMarginsGuide.topAnchor].active = YES;
+    [self.closeButton.topAnchor constraintEqualToAnchor:view.layoutMarginsGuide.topAnchor constant:15].active = YES;
     [self.closeButton setTitle:@"Close" forState:UIControlStateNormal];
     [self.closeButton setTitleColor: [UIColor blueColor] forState:UIControlStateNormal];
+    
+    view = self.imageScrollView;
+    
+    self.postImageView.translatesAutoresizingMaskIntoConstraints = false;
+    [self.postImageView.leadingAnchor constraintEqualToAnchor:view.leadingAnchor].active = YES;
+    [self.postImageView.trailingAnchor constraintEqualToAnchor:view.trailingAnchor].active = YES;
+    [self.postImageView.topAnchor constraintEqualToAnchor:view.topAnchor].active = YES;
+    [self.postImageView.bottomAnchor constraintEqualToAnchor:view.bottomAnchor].active = YES;
+    self.postImageView.contentMode = UIViewContentModeScaleAspectFit;
 
 
     
