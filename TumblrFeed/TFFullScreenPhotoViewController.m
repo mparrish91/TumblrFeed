@@ -18,6 +18,9 @@
 @property(strong,nonatomic) UIImageView *postImageView;
 @property(strong,readwrite,nonatomic) NSString *url;
 
+@property(strong,nonatomic) UIButton *closeButton;
+
+
 
 @end
 
@@ -31,6 +34,8 @@
 {
     self.imageScrollView = [[UIScrollView alloc]init];
     self.postImageView = [[UIImageView alloc]init];
+    self.closeButton = [[UIButton alloc]init];
+
 
     if (!(self = [super init]))
         return nil;
@@ -68,6 +73,10 @@
     [self.postImageView setImageWithURL:[NSURL URLWithString:self.url] placeholderImage:[UIImage imageNamed:@"placeholder-background"]];
     
     
+    [self.closeButton addTarget:self
+               action:@selector(onCloseButtonTapped:)
+     forControlEvents:UIControlEventTouchUpInside];
+    
 }
 
 
@@ -104,8 +113,16 @@
     
     [view addSubview:self.imageScrollView];
     [view addSubview:self.postImageView];
+    [view addSubview:self.closeButton];
 
 }
+
+-(void)onCloseButtonTapped
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+
+}
+
 
 
 #pragma mark - AutoLayout
@@ -121,6 +138,11 @@
     [self.imageScrollView.topAnchor constraintEqualToAnchor:view.topAnchor].active = YES;
     [self.imageScrollView.bottomAnchor constraintEqualToAnchor:view.bottomAnchor].active = YES;
     self.imageScrollView.contentMode = UIViewContentModeScaleToFill;
+
+    self.closeButton.translatesAutoresizingMaskIntoConstraints = false;
+    [self.closeButton.trailingAnchor constraintEqualToAnchor:view.layoutMarginsGuide.trailingAnchor].active = YES;
+    [self.closeButton.topAnchor constraintEqualToAnchor:view.layoutMarginsGuide.topAnchor].active = YES;
+    [self.closeButton setTitle:@"Close" forState:UIControlStateNormal];
 
     
 }
