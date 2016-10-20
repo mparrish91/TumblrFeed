@@ -19,4 +19,4 @@ Plan to add more color and graphics and fonts :)
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/uQAAuHk.gif' title=‘Tumblr Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/5RvD0Jt.gif' title=‘Tumblr Video Walkthrough' width='' alt='Video Walkthrough' />
